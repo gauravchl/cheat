@@ -1,0 +1,22 @@
+at mvc action
+{
+	return json(new{name="gaurav",city="Dewas"});
+}
+
+
+at script
+
+function getdata(data)
+{
+	
+	alert(data.name +" "+data.city);
+	
+	//or apply loop
+	
+	$.each( data, function( key, val ) {
+    	
+	alert(key + "" +val);
+  	
+	});
+	
+}

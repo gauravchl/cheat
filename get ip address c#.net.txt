@@ -1,0 +1,5 @@
+HttpRequest currentRequest = HttpContext.Current.Request;
+            string ipAddress = currentRequest.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (ipAddress == null || ipAddress.ToLower() == "unknown")
+                ipAddress = currentRequest.ServerVariables["REMOTE_ADDR"];

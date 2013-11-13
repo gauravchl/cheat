@@ -1,0 +1,233 @@
+<------------Integrate facebook login in  existing MVC app--------------->
+
+<---------------------Tested By Gauav Chikhale--------------------------------->
+
+
+
+<------------Requirements---------------->
+
+Install DotNetOpenAuth.AspNet pakage from NuGet
+
+	has total 6 files
+	
+	DotNetOpenAuth.AspNet
+	DotNetOpenAuth.Core
+	DotNetOpenAuth.OAuth
+	DotNetOpenAuth.OAuth.Consumer
+	DotNetOpenAuth.OpenId
+	DotNetOpenAuth.OpenID.RelayingParty
+
+Now add reference for extansion 
+ 	
+	Microsoft.Web.WebPages.OAuth
+
+	now add following lines in webconfig to recognise newer version 4.3.0.0(no need if you click ye to all after package instalation,)
+
+	 <dependentAssembly>
+        <assemblyIdentity name="DotNetOpenAuth.AspNet" publicKeyToken="2780ccd10d57b246" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.3.0.0" newVersion="4.3.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="DotNetOpenAuth.Core" publicKeyToken="2780ccd10d57b246" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.3.0.0" newVersion="4.3.0.0" />
+      </dependentAssembly>
+
+
+
+
+add facebook pacakage from nuget to get more data from facebook graph search using accesstoken
+
+
+<---special NOTE---->
+
+IF there is no updation will be taking place at facebook authenticatio'popup of access premissions like email,friend id..
+so uninstall all oauths pacakeg and faceboomk packages as well ,than re install it clean.and now define your fields of
+accesstoken at facebookclient object's get methode  
+ie:dynamic me = client.Get("me",new { fields = "first_name,last_name,picture.type(large),gender,email" });
+now this will reflect  accessing permission,
+accesstoken has some life as well so this may alsoo produce some problem
+<---special NOTE---->
+
+
+
+
+
+
+
+
+  var client = new FacebookClient(result.ExtraData["accesstoken"]);
+                dynamic me = client.Get("me",new { fields = "first_name,last_name,picture.type(large),gender,email" });
+           
+                    return View("signup");
+
+
+
+
+
+
+
+
+
+
+
+ 
+Create AuthConfig.cs under App_Start  replace by this
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Microsoft.Web.WebPages.OAuth;
+using crocro2.Models;
+namespace crocro2
+{
+    public static class AuthConfig
+    {
+        public static void RegisterAuth()
+        {
+            // To let users of this site log in using their accounts from other sites such as Microsoft, Facebook, and Twitter,
+            // you must update this site. For more information visit http://go.microsoft.com/fwlink/?LinkID=252166
+
+            //OAuthWebSecurity.RegisterMicrosoftClient(
+            //    clientId: "",
+            //    clientSecret: "");
+
+            //OAuthWebSecurity.RegisterTwitterClient(
+            //    consumerKey: "",
+            //    consumerSecret: "");
+
+            OAuthWebSecurity.RegisterFacebookClient(
+                appId: "",
+                appSecret: "");
+
+            //OAuthWebSecurity.RegisterGoogleClient();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<--------------------------------------------------------main  code ------------------------------------------------------------------>
+
+
+
+	    (*********add submit button at view within begin form to login with facebook***********)
+
+
+
+
+@using (Html.BeginForm("ExternalLogin", "landing", new { ReturnUrl = "" }))
+    {
+    <button type="submit" id="fsignin_button" class="col-10" name="provider" value="facebook" title="Log in using your Facebook account">Facebook</button>
+	
+    }
+
+
+
+
+
+			(*******now define these on your controllers**********)
+
+
+
+[HttpPost]
+        [AllowAnonymous]
+       
+        public ActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+        }
+
+
+        internal class ExternalLoginResult : ActionResult
+        {
+            public ExternalLoginResult(string provider, string returnUrl)
+            {
+                Provider = provider;
+                ReturnUrl = returnUrl;
+            }
+
+            public string Provider { get; private set; }
+            public string ReturnUrl { get; private set; }
+
+            public override void ExecuteResult(ControllerContext context)
+            {
+                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
+            }
+        }
+
+
+
+        public string ExternalLoginCallback(string returnUrl)
+        {
+            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            //if (!result.IsSuccessful)
+            //{
+            //    return RedirectToAction("signin","landing");
+            //}
+
+            ////if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+            ////{
+            ////    return RedirectToAction("signin", "landing");
+            ////}
+
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    // If the current user is logged in add the new account
+            //    OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
+            //    return RedirectToAction("signin", "landing");
+            //}
+            //else
+            {
+                // User is new, ask for their desired membership name
+
+         
+                user obj=new user();
+                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+              
+                obj.fname = result.ExtraData["link"];
+                obj.lname = result.ExtraData["id"];
+
+                obj.emailID = result.ExtraData["name"];
+
+                obj.city = result.ExtraData["gender"];
+            string xyz="a";
+               
+                    return xyz; 
+
+
+
+		(------or for graph api data using access token && facebooksdk package---------)
+			
+			var client = new FacebookClient(result.ExtraData["accesstoken"]);
+           	     	dynamic me = client.Get("me",new { fields = "first_name,last_name,picture.type(large),gender,email" });
+           	     	return View("signup");
+
+		(---------------)
+
+
+
+
+                
+            }
+        }
+
+
+
+
+
+
+
+

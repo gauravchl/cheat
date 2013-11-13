@@ -1,0 +1,16 @@
+$('#textarea').keyup(function(event){
+
+       //use event.which in firefox
+ var keycode = (event.keyCode ? event.keyCode : event.which);
+
+        alert("Key code for pressed key "+keycode);
+
+       //enter pressed
+ if(keycode == '13'){
+  //perform enter key press operation on textarea
+ }
+       //esc pressed
+        if(keycode == '27'){
+  //perform esc key press operation on textarea
+ }
+});

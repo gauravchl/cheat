@@ -1,0 +1,133 @@
+/*@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);*/
+html,
+button,
+input,
+select,
+textarea {
+    color: #004358;
+}
+
+body{
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+    font-family:'Noto Sans', sans-serif;
+
+}
+p ,h1,h2,h3,h4,h6
+{
+     padding: 0;
+    margin: 0;
+
+}
+
+
+ul 
+{
+    margin: 0;
+    padding:0;
+    list-style-type: none;
+}
+a
+{
+    text-decoration: none;
+    color: #004358;
+
+
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+header, section, footer
+{   
+    display: block;
+    width: 100%;
+    
+    
+}
+input
+{
+    box-sizing:border-box;
+}
+
+
+/*960 responsive */
+
+.row
+{   position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0px 8px;
+}
+
+
+[class^="col-"] {
+    float: left;
+    margin: 0 4.16666666667% 0 0;
+    list-style: none;
+    position: relative;
+}
+
+[class^="col-"]:last-child {
+    margin: 0;
+}
+
+.col-1 { width: 4.5138888889% }
+.col-2 { width: 13.1944444444% }
+.col-3 { width: 21.875% }
+.col-4 { width: 30.5555555556% }
+.col-5 { width: 39.2361111111% }
+.col-6 { width: 47.9166666667% }
+.col-7 { width: 56.5972222222% }
+.col-8 { width: 65.2777777778% }
+.col-9 { width: 73.9583333333% }
+.col-10 { width: 82.6388888889% }
+.col-11 { width: 91.3194444444% }
+.col-12 { width: 100%; margin: 0 }
+
+/*960 responsive */
+
+
+/*960 FIX*/
+
+/*.row { 
+    clear:both; 
+    width:960px; 
+    margin:0 auto;
+    padding: 0px 8px; 
+}
+
+[class^="col-"] {
+    float: left;
+    margin: 0 40px 0 0;
+    list-style: none;
+    position: relative;
+}
+
+[class^="col-"]:last-child {
+    margin: 0;
+}
+
+.col-1 { width: 43.333333333333336px }
+.col-2 { width: 126.66666666666664px }
+.col-3 { width: 210px }
+.col-4 { width: 293.3333333333333px }
+.col-5 { width: 376.66666666666674px }
+.col-6 { width: 460px }
+.col-7 { width: 543.3333333333334px }
+.col-8 { width: 626.6666666666666px }
+.col-9 { width: 710px }
+.col-10 { width: 793.3333333333334px }
+.col-11 { width: 876.6666666666666px }
+.col-12 { width: 960px; margin: 0 }*/
+
+
+/*960 FIX*/

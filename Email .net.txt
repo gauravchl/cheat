@@ -1,0 +1,35 @@
+using System.Net.mail;
+
+
+
+
+
+private void sendMail(string to,string custombody)
+        {
+           
+
+            string from = "networkmy610@gmail.com"; //Replace this with your own correct Gmail Address
+            
+
+            MailMessage mail = new MailMessage();
+            mail.To.Add(to);
+            mail.From = new MailAddress(from, "CROCRO 2", System.Text.Encoding.UTF8);
+            mail.Subject = "Wellcome to CROCRO 2";
+            mail.SubjectEncoding = System.Text.Encoding.UTF8;
+            mail.IsBodyHtml = true;
+            mail.Body = "<html> <head> <style type='text/css'> body{font-family: sans-serif;} h1,h2,h3,h4,h5{text-align: center; } a{text-decoration: none;text-align: center; font-size: 26px;font-weight: 600;color:#fff} .row{width: 600px;margin: 0 auto;overflow: hidden;padding:0 12px;} </style> </head> <body> <div class='row' style='background:#12C27C;line-height:58px;'><a href='http://crocro.somee.com/'>CROCRO 2</a></div> <div class='row' style='background: #eee;padding-bottom:32px;'>"+custombody+"</div> <div class='row' style='font-size: 12px;color: #888;text-align:center;border-top:solid 6px #12C27C'><hr>You received this email because your account is Registered at CROCRO2.<br/>If you received this message in error and did not sign up for crocro2 than reply to this Email with related isseue.</div> </body> </html>";
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            
+            mail.Priority = MailPriority.High;
+           
+            SmtpClient client = new SmtpClient();
+            //Add the Creddentials- use your own email id and password
+
+            client.Credentials = new System.Net.NetworkCredential(from, "mynetwork123");
+
+            client.Port = 587; // Gmail works on this port
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true; //Gmail works on Server Secured Layer
+
+            client.Send(mail);
+        }

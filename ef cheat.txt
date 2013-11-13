@@ -1,0 +1,21 @@
+//-------use .contains() to int type---//
+
+var listOfRoleId = user.Roles.Select(r => r.RoleId);
+var roles = db.Roles.Where(r => listOfRoleId.Contains(r.RoleId));
+
+note:dont put "user.Roles.Select(r => r.RoleId)" this statment direct to 2'nd statment.
+Use variable to store list of id's than place this variable to next statment with .contains(your code)
+
+link http://stackoverflow.com/questions/5624614/get-a-list-of-elements-by-their-id-in-entity-framework
+
+
+
+
+
+
+
+
+
+//----TempData vs ViewBag----//
+
+Temp data persistan in redirections while viewbag is not

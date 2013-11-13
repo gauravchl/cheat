@@ -1,0 +1,131 @@
+@functions
+{
+   string comparedatetime(DateTime dt)
+    {
+        string result;
+        
+int Year = DateTime.Now.Year - dt.Year;
+        int Month = DateTime.Now.Month - dt.Month;
+        int Day = DateTime.Now.Day - dt.Day;
+        int Hour = DateTime.Now.Hour - dt.Hour;
+        int Minute = DateTime.Now.Minute - dt.Minute;
+        int Second = DateTime.Now.Second - dt.Second;
+              
+       
+       if(Year>0)
+           {if(Month<0)
+            {  Year--;
+               if(Year==0)
+               {
+                    result= Month + 12+" Month";
+               }
+               else
+               {
+                   result = Year + " Year";
+               }
+               
+            }
+             else
+            {
+                result = Year+" Year";
+            }
+       }
+       else
+       {
+            if(Month>0)
+            {   if(Day<0)
+                {  Month--;
+                    if(Month==0)
+                    {
+                        result= Day + DateTime.DaysInMonth(dt.Year,dt.Month)+" Day";
+                    }
+                    else
+                    {
+                       result = Month + " Month";
+                    }
+
+                }
+                else
+                {
+                    result = Month+" Month";
+                }
+            }
+            else
+            {
+                if(Day>0)
+                {   if(Hour<0)
+                    {  Day--;
+                        if(Day==0)
+                        {
+                            result= Hour + 24+" Hour";
+                        }
+                        else
+                        {
+                           result = Day + " Day";
+                        }
+
+                    }
+                    else
+                    {
+                        result = Day+" Day";
+                    }
+                }
+                else
+                {
+                    if(Hour>0)
+                    {   if(Minute<0)
+                        {  Hour--;
+                            if(Hour==0)
+                            {
+                                result= Minute + 60+" Minute";
+                            }
+                            else
+                            {
+                               result = Hour + " Hour";
+                            }
+
+                        }
+                        else
+                        {
+                            result = Hour+" Hour";
+                        }
+                    }
+                    else
+                    {
+                        if(Minute>0)
+                        {   if(Second<0)
+                            {  Minute--;
+                                if(Minute==0)
+                                {
+                                    result= Second + 60+" Second";
+                                }
+                                else
+                                {
+                                   result = Minute + " Minute";
+                                }
+
+                            }
+                            else
+                            {
+                                result = Minute+" Minute";
+                            }
+                        }
+                        else
+                        {
+                            result=Second+" Second";
+                        }
+
+
+
+                    }
+
+
+                }
+
+            }
+       }
+
+     
+       return result;
+    }
+}

@@ -1,0 +1,70 @@
+<form action="profile/postshare" id="postshareform">
+                
+    <input type="text" name="fullname"/>
+	<input type="file" id="file1" />
+
+	<button type="submit">submit</button>               
+</form>
+
+
+
+<script type="text/javascript">
+
+ $( "#postshareform" ).submit(function( event ) {
+
+    event.preventDefault();
+	var fd = new FormData();
+    var $form = $(this);
+    var fi = document.getElementById('file1');
+    
+    fd.append("image", fi.files[0]);
+    fd.append("fullname", $form.find("input[name='fullname']").val());
+
+                       
+                       
+                       
+    $.ajax({
+        url: $form.attr("action"),
+        type: "POST",
+        data: fd,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            
+        },
+        error: function (jqXHR, textStatus, errorMessage) {
+            // Optional
+        }
+    });
+
+</script>
+
+
+
+//At controller
+
+Request.Form["fullname"];
+Request.File[0];
+
+HttpPostedFileBase obj ;
+            if (Request.Files.Count > 0) 
+            {
+               obj  =Request.Files[0] as HttpPostedFileBase;
+            }
+
+
+
+
+//dynamic display image
+                    function readURL(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    $('#imgupload2').attr('src', e.target.result);
+                                    $('#imgupload2').css({"display":"block"});
+                                }
+                                reader.readAsDataURL(input.files[0]); }                  
+                            }
+                        $("#imguploadip2").change(function () {
+                        readURL(this);
+                        });
