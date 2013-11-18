@@ -19,3 +19,12 @@ link http://stackoverflow.com/questions/5624614/get-a-list-of-elements-by-their-
 //----TempData vs ViewBag----//
 
 Temp data persistan in redirections while viewbag is not
+
+
+
+
+
+//-----------Updating db------------//
+
+db.Entry(objs).State = EntityState.Modified;
+db.savechanges();
