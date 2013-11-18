@@ -28,3 +28,15 @@ Temp data persistan in redirections while viewbag is not
 
 db.Entry(objs).State = EntityState.Modified;
 db.savechanges();
+
+
+
+
+
+//-----some isseue with ef -----NULL---//
+
+value=null;
+
+db.user.where(x=>x.pid==value)// not working for null
+
+db.user.where(value == null ? x=>x.pid == null : x=>x.pid == value) // add manualy than it wil work
