@@ -1,0 +1,29 @@
+<--------webconfig file--------->
+<system.web>
+    
+    <customErrors mode="On" defaultRedirect="~/error">
+      <error redirect="~/error/index/404" statusCode="404" />
+    </customErrors>
+</system.web>
+    
+
+
+<----Inside error controler or anything that you define in webconfig file---->  
+  
+
+
+public class errorController : Controller
+    {
+        //
+        // GET: /error/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+    }
+
+
+
+<------and than view to display-------->
