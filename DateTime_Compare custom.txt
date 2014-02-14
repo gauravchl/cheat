@@ -129,3 +129,70 @@ int Year = DateTime.Now.Year - dt.Year;
        return result;
     }
 }
+
+
+
+
+
+-coffee script code-
+compareDateTime = (date) ->
+  currentDate=new Date()
+  result=0
+  Year = currentDate.getFullYear() - date.getFullYear()
+  Month = currentDate.getMonth()-date.getMonth()
+  Day = currentDate.getDate()-date.getDate()
+  Hour = currentDate.getHours()-date.getHours()
+  Minute = currentDate.getMinutes()-date.getMinutes()
+  Second = currentDate.getSeconds()-date.getSeconds()
+  if Year > 0
+    if Month<0
+      Year=Year-1
+      if Year is 0
+        result =Month+12+" Month"
+      else
+        result =Year+" Year"
+    else
+      result=Year+" Year"
+  else
+    if Month > 0
+      if Day < 0
+        Month=Month-1
+        if Month is 0
+          result= Day + new Date(date.getFullYear(), date.getMonth(), 0).getDate() +" Day"
+        else
+          result = Month + " Month"
+      else
+        result = Month+" Month";
+    else
+      if Day>0
+        if Hour<0
+          Day=Day-1
+          if Day is 0
+            result= Hour + 24+" Hour";
+          else
+           result = Day + " Day"
+        else
+          result = Day+" Day"
+      else
+        if Hour>0
+          if Minute<0
+            Hour=Hour-1
+            if Hour is 0
+              result= Minute + 60+" Minute"
+            else
+              result = Hour + " Hour"
+          else
+            result = Hour+" Hour"
+        else
+          if Minute>0
+            if Second<0
+              Minute=Minute-1
+              if Minute is 0
+                result= Second + 60+" Second"
+              else
+                result = Minute + " Minute"
+            else
+              result = Minute+" Minute"
+          else
+            result=Second+" Second"
+  return result

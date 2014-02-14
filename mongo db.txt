@@ -1,0 +1,10 @@
+ 
+
+
+Arry
+
+update existing fields in array---->
+Knotes.update({_id: knote_id,'editors.account_id':currentuser},{$set:{'editors.$.date':new Date()}})  
+
+add new fields to arry---->>>
+Knotes.update({_id: knote_id},{$addToSet:{'editors':{'account_id':currentuser,'date':new Date()}}})
