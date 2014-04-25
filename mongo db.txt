@@ -8,3 +8,8 @@ Knotes.update({_id: knote_id,'editors.account_id':currentuser},{$set:{'editors.$
 
 add new fields to arry---->>>
 Knotes.update({_id: knote_id},{$addToSet:{'editors':{'account_id':currentuser,'date':new Date()}}})
+
+
+
+Genrate new ID
+new Meteor.Collection.ObjectID()._str
