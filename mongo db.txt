@@ -13,3 +13,5 @@ Knotes.update({_id: knote_id},{$addToSet:{'editors':{'account_id':currentuser,'d
 
 Genrate new ID
 new Meteor.Collection.ObjectID()._str
+
+{"profile.adminActivated":{$ne:true},"services.invitation.inviter":{$exists:true}}
