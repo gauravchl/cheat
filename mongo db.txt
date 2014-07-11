@@ -15,3 +15,11 @@ Genrate new ID
 new Meteor.Collection.ObjectID()._str
 
 {"profile.adminActivated":{$ne:true},"services.invitation.inviter":{$exists:true}}
+
+
+
+
+
+THE MAP FEATURE Learnt FROM Serge 10-July-2014
+
+db.users.find({"services.password.bcrypt":{$exists:true}},{"emails.address": 1, _id: 0}).map(function(entry){return entry.emails[0].address;}).join(',')
