@@ -1,0 +1,9 @@
+Blockhelper on handlebar at server side of meteor
+
+
+OriginalHandlebars.registerHelper 'is_new_row', (context, options)->
+  avatar_per_row=10
+  return options.inverse(this) unless context>0
+  if context % avatar_per_row is 0
+    return options.fn(this)
+  return options.inverse(this)
