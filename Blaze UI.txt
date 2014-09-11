@@ -1,0 +1,3 @@
+renderedTemplate = UI.renderWithData(Template.knote_replies,{})
+parentElement = $('.knote-reply-cn[data-id=8f8Ju5Yh8xRbMQakZ]')[0]
+UI.insert(renderedTemplate, parentElement)
