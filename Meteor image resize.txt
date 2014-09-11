@@ -1,0 +1,46 @@
+$(".testing-input").on 'change',(e)->
+    file=e.target.files[0]
+    console.log '#gc file changed'
+    console.log 'file name = '+file.name
+    console.log 'file name = '+file.size
+
+    rd=new FileReader();
+    rd2=new FileReader();
+    rd2.onload=(e)->
+      $('.testing-image2').attr 'src',e.target.result
+
+    rd.onload=(e)->
+        $('.testing-image').attr 'src',e.target.result
+        console.log "#GC meteor called"
+        Meteor.call 'calcImg',e.target.result,(e,r)->
+          console.log "Error GC" if e
+          console.log "#GC result = "
+          console.log r
+          $('.testing-image').attr 'src','data:image/jpeg;base64,' + btoa r
+
+    rd2.readAsDataURL(file)
+    rd.readAsBinaryString(file)
+
+
+
+#########At Server
+calcImg:(file)->
+    console.log "#gc1"
+    
+
+    fs= Npm.require('fs')
+    im=Meteor.require("imagemagick")
+  
+    option=
+      srcData:file,
+      width:256
+
+    console.log "#gc2"
+
+    r=Async.runSync (done)->
+        im.resize option, (e,o,er)->
+          console.log "#gc4"
+          done null,o
+
+    console.log "#gc3"
+    return r.result
